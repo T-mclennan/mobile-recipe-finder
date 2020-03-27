@@ -1,11 +1,10 @@
 import React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
-import { CATEGORY } from '../data/dummy-data';
-
-const selectCategory = CATEGORY.find(cat => cat.id === catId);
+import { CATEGORIES } from '../data/dummy-data';
 
 const CategoryMealScreen = props => {
-  const catId = props.navigation.getParams('categoryId');
+  const catId = props.navigation.getParam('categoryId');
+  const selectCategory = CATEGORIES.find(cat => cat.id === catId);
   return (
     <View style={styles.screen}>
       <Text>The Category Meal Screen!</Text>
@@ -20,6 +19,15 @@ const CategoryMealScreen = props => {
       />
     </View>
   );
+};
+
+CategoryMealScreen.navigationOptions = navigationData => {
+  const catId = navigationData.navigation.getParam('categoryId');
+  const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
+
+  return {
+    headerTitle: selectedCategory.title,
+  };
 };
 
 const styles = StyleSheet.create({
